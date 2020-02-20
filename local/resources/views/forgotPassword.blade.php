@@ -1,0 +1,149 @@
+@extends('layouts.main')
+@section('page_title','สยามวานิช')
+@section('content')
+
+
+
+
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-12">
+<div class="row centerbg">
+
+
+
+<div class="col-md-3 padding0">
+<div class="logobg1"></div>
+</div>
+
+
+  <div class="col-md-7 padding25 bgw">
+
+      <div class="texthead">ลืมรหัสผ่าน</div>
+      <div class="textunder">กรณีลืมรหัสผ่านในการเข้าใช้งาน กรุณากรอกข้อมูลด้านล่างนี้</div>
+      @if ($errors->count()>0)
+        <div class="alert alert-danger padding25 bgw">
+        @foreach ($errors->all() as $error )
+          <li>{{$error}}</li>
+          @endforeach
+        </div>
+      @endif
+      @if (Session::has('failed'))
+        <div class="alert alert-danger padding25 bgw">
+          <li>{{Session::get('failed')}}</li>
+        </div>
+      @endif
+      <div class="form-horizontal">
+
+      <fieldset>
+      <div class="form-group">
+      <p class="col-md-3 idcard" for="textinput">ใส่เลขบัตรประชาชน</p>
+      <div class="col-md-6">
+        {{Form::open(['url'=>'recoverPassword'])}}
+        {{Form::text('iden','',array('class' => 'form-control input-md' , 'maxlength'=>'13' ,'id' => 'iden','required' => 'required'))}}
+      {{-- <input id="textinput" name="iden" type="text" placeholder="" class="form-control input-md"> --}}
+      </div>
+      </div>
+      </fieldset>
+</div>
+
+      <div class="form-horizontal">
+
+      <fieldset>
+      <div class="form-group">
+      <p class="col-md-3 idcard" for="textinput">Username</p>
+      <div class="col-md-6">
+        {{Form::text('username','',array('class' => 'form-control input-md','id' => 'username','required' => 'required'))}}
+      {{-- <input id="textinput" name="username" type="text" placeholder="" class="form-control input-md" > --}}
+      </div>
+      </div>
+      </fieldset>
+</div>
+
+      <div class="form-horizontal">
+
+      <fieldset>
+      <div class="form-group">
+      <p class="col-md-3 idcard" for="textinput">วันเดือนปีที่เกิด</p>
+      <div class="col-md-6">
+        {{Form::text('birthday','',array('class' => 'form-control input-md' , 'maxlength'=>'8' ,'id' => 'birthday','required' => 'required'))}}
+      {{-- <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> --}}
+      <p class="col-md-12 short" for="birthdate">ใส่เฉพาะตัวเลขเช่น 08042014</p>
+      </div>
+      </div>
+      </fieldset>
+</div>
+
+<div class="form-horizontal">
+
+<fieldset>
+  <div class="form-group">
+<div class="col-md-3 idcard">Captcha :</div>
+<div class="col-md-6 g-recaptcha" data-sitekey="6Lc_NDQUAAAAABi_389s_pMtZJ-Euh3IirU5-LVD" data-callback="onSubmit"></div>
+
+</div>
+</fieldset>
+</div>
+
+
+       <div class="form-horizontal">
+      <fieldset>
+
+      <!-- Button -->
+      <div class="form-group">
+      <label class="col-md-3 control-label" for=""></label>
+      <div class="col-md-3 top20">
+        {{ Form::submit('กู้รหัสผ่าน',array('class' => 'btn regisbot03 btn-inverse vovo1' ,
+        'id'=>'submit','disabled'=>'disabled'))}}
+      </div>
+      </div>
+      </fieldset>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+function onSubmit(token) {
+  document.getElementById("submit").disabled = false;
+}
+$('#birthday').keypress(function (e) {
+      var regex =/^[0-9]+$/;
+      var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+      if (regex.test(str)) {
+        return true;
+      }
+      else {
+        e.preventDefault();
+        return false;
+      }
+    });
+$('#iden').keypress(function (e) {
+          var regex =/^[0-9]+$/;
+          var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+          if (regex.test(str)) {
+            return true;
+          }
+          else {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+
+</script>
+@endsection
